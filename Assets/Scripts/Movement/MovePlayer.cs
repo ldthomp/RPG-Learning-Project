@@ -4,38 +4,35 @@ using UnityEngine.AI;
 using UnityEngine;
 using System;
 
-public class MovePlayer : MonoBehaviour
+
+namespace RPG.Movement
 {
-    [SerializeField] Transform target;
-
-    void Update()
+    public class MovePlayer : MonoBehaviour
     {
+        [SerializeField] Transform target;
 
-        
-        if (Input.GetMouseButton(0))
+        void Update()
         {
-            MoveToCursor();
 
-        }
-        UpdateAnimator();
-    }
-    private void MoveToCursor()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-        bool hasHit = Physics.Raycast(ray, out hit);
+            //if (Input.GetMouseButton(0))
+            //{
+            //    MoveToCursor();
 
-        if (hasHit)
-        {
-            GetComponent<NavMeshAgent>().destination = hit.point;
+            //}
+            UpdateAnimator();
         }
 
-    }
-    private void UpdateAnimator()
-    {
-        Vector3 velocity = GetComponent<NavMeshAgent>().velocity;
-        Vector3 localVelocity = transform.InverseTransformDirection(velocity);
-        float speed = localVelocity.z;
-        GetComponent<Animator>().SetFloat("ForwardSpeed",speed);
+        public void MoveTo(Vector3 destination)
+        {
+            GetComponent<NavMeshAgent>().destination = destination;
+        }
+
+        private void UpdateAnimator()
+        {
+            Vector3 velocity = GetComponent<NavMeshAgent>().velocity;
+            Vector3 localVelocity = transform.InverseTransformDirection(velocity);
+            float speed = localVelocity.z;
+            GetComponent<Animator>().SetFloat("ForwardSpeed", speed);
+        }
     }
 }
