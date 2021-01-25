@@ -9,20 +9,14 @@ namespace RPG.Control
 {
     public class PlayerController : MonoBehaviour
     {
-        //MovePlayer movePlayer;  - Left in for future reference of calling multple methods from moveplayer
-
-        void Start()
-        {
-            //movePlayer = GetComponent<MovePlayer>();    - Left in for future reference of calling multple methods from moveplayer
-        }
 
         void Update()
         {
-            InteractWithCombat();
-            InteractWithMovement();
+            if(InteractWithCombat()) return;
+            if(InteractWithMovement()) return;
         }
 
-        private void InteractWithCombat()
+        private bool InteractWithCombat()
         {
             RaycastHit[] hits = Physics.RaycastAll(GetMouseRay());
             foreach (RaycastHit hit in hits)
@@ -33,29 +27,27 @@ namespace RPG.Control
                 if(Input.GetMouseButtonDown(0))
                 {
                     GetComponent<Fighter>().Attack(target);
+                    //navmeshagent stopping distance = weaponrange from fighter
                 }
+                return true;
             }
+            return false;
         }
 
-        private void InteractWithMovement()
-        {
-            if (Input.GetMouseButton(0))
-            {
-                MoveToCursor();
-            }
-        }
-
-        public void MoveToCursor()
+        private bool InteractWithMovement()
         {
             RaycastHit hit;
             bool hasHit = Physics.Raycast(GetMouseRay(), out hit);
 
             if (hasHit)
             {
-                //movePlayer.MoveTo(hit.point); - Left in for future reference of calling multple methods from moveplayer
-                GetComponent<MovePlayer>().MoveTo(hit.point);
+                if (Input.GetMouseButton(0))
+                {
+                    GetComponent<MovePlayer>().StartMoveAction(hit.point);
+                }
+                return true;
             }
-
+            return false;
         }
 
         private static Ray GetMouseRay()
