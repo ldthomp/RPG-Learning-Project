@@ -46,19 +46,27 @@ namespace RPG.Combat
             else
             {
                 movePlayer.Cancel(); //stops Navmesh
-                AttackBehaviour();
+                AttackBehaviour(); 
             }
         }
 
         private void AttackBehaviour()
         {
+            transform.LookAt(target.transform);
             if (timeSinceLastAttack > timeBetweenAttacks)
             {
                 //this will trigger Hit() event
-                GetComponent<Animator>().SetTrigger("Attack");
+                TriggerAttack();
                 timeSinceLastAttack = 0f;
             }
         }
+
+        private void TriggerAttack()
+        {
+            GetComponent<Animator>().ResetTrigger("stopAttacking");
+            GetComponent<Animator>().SetTrigger("Attack");
+        }
+
         //Animation Event on Attack
         void Hit()
         {
@@ -74,8 +82,21 @@ namespace RPG.Combat
 
         public void Cancel()
         {
-            GetComponent<Animator>().SetTrigger("stopAttacking");
+            StopAttack();
             target = null;
         }
+
+        private void StopAttack()
+        {
+            GetComponent<Animator>().ResetTrigger("Attack");
+            GetComponent<Animator>().SetTrigger("stopAttacking");
+        }
+
+        public bool CanAttack(CombatTarget combatTarget)
+        {
+            if (combatTarget == null) { return false; }
+            Health targetToTest = combatTarget.GetComponent<Health>();
+            return targetToTest != null && !targetToTest.IsDead();
+        }   
     }
 }
