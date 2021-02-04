@@ -1,4 +1,4 @@
-﻿using RPG.core;
+﻿using RPG.Core;
 using RPG.Movement;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,16 +15,13 @@ namespace RPG.Combat
         [SerializeField] float timeBetweenAttacks = 1f;
         [SerializeField] float weaponDamage = 10f;
 
-        NavMeshAgent navMeshAgent;
-
-        float timeSinceLastAttack = 0f;
+        float timeSinceLastAttack = Mathf.Infinity;
 
         private void Start()
         {
-            navMeshAgent = GetComponent<NavMeshAgent>();
             movePlayer = GetComponent<MovePlayer>();
         }
-        public void Attack(CombatTarget combatTarget)
+        public void Attack(GameObject combatTarget)
         {
             target = combatTarget.transform.GetComponent<Health>();
             GetComponent<ActionScheduler>().StartAction(this);
@@ -32,6 +29,12 @@ namespace RPG.Combat
             //stop within range
             //check distance 
             //check it is moving away
+        }
+        public bool CanAttack(GameObject combatTarget)
+        {
+            if (combatTarget == null) { return false; }
+            Health targetToTest = combatTarget.GetComponent<Health>();
+            return targetToTest != null && !targetToTest.IsDead();
         }
         void Update()
         {
@@ -45,6 +48,7 @@ namespace RPG.Combat
             }
             else
             {
+                Debug.Log(gameObject.name + " mover is being cancelled");
                 movePlayer.Cancel(); //stops Navmesh
                 AttackBehaviour(); 
             }
@@ -64,6 +68,7 @@ namespace RPG.Combat
         private void TriggerAttack()
         {
             GetComponent<Animator>().ResetTrigger("stopAttacking");
+            Debug.Log("resetting stop attacking trigger of " + gameObject.name);
             GetComponent<Animator>().SetTrigger("Attack");
         }
 
@@ -90,13 +95,7 @@ namespace RPG.Combat
         {
             GetComponent<Animator>().ResetTrigger("Attack");
             GetComponent<Animator>().SetTrigger("stopAttacking");
+            Debug.Log("setting stop attacking trigger of " + gameObject.name);
         }
-
-        public bool CanAttack(CombatTarget combatTarget)
-        {
-            if (combatTarget == null) { return false; }
-            Health targetToTest = combatTarget.GetComponent<Health>();
-            return targetToTest != null && !targetToTest.IsDead();
-        }   
     }
 }

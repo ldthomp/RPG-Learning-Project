@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-namespace RPG.core
+namespace RPG.Core
 {
     public class ActionScheduler : MonoBehaviour
     {
@@ -11,13 +11,17 @@ namespace RPG.core
         public void StartAction(IAction action)
         {
             if (currentAction == action) return;
-            if(currentAction != null)
+            if (currentAction != null)
             {
                 currentAction.Cancel();
             }
 
             currentAction = action;
         }
-    }
+        public void CancelCurentAction()
+        {
+            StartAction(null);
+        }
+    }   
 }
 
