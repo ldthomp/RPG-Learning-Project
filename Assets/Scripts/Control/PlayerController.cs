@@ -38,7 +38,7 @@ namespace RPG.Control
                     continue;
                 }
 
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetMouseButton(0))
                 {
                     GetComponent<Fighter>().Attack(target.gameObject);
                     //navmeshagent stopping distance = weaponrange from fighter
@@ -57,7 +57,7 @@ namespace RPG.Control
             {
                 if (Input.GetMouseButton(0))
                 {
-                    GetComponent<MovePlayer>().StartMoveAction(hit.point);
+                    GetComponent<Mover>().StartMoveAction(hit.point);
                 }
                 return true;
             }

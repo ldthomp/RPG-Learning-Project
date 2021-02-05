@@ -4,7 +4,7 @@ using RPG.Core;
 
 namespace RPG.Movement
 {
-    public class MovePlayer : MonoBehaviour, IAction
+    public class Mover : MonoBehaviour, IAction
     {
         [SerializeField] Transform target;
         NavMeshAgent navMeshAgent;
