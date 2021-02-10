@@ -1,6 +1,38 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &752195503222648536
+--- !u!136 &556744391486104211
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571974423828045690}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &6986984112762111259
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571974423828045690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9877a5036537a5144bc6f2598c755844, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chaseDistance: 5
+  suspicionTime: 2
+  gizmosOn: 1
+  patrolPath: {fileID: 0}
+  waypointTolerance: 1
+  waypointDwellTime: 3
+--- !u!1001 &4424753320656695243
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -130,6 +162,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a710368f58dc7f44d87b0840549c8ac2, type: 3}
+--- !u!1 &571974423828045690 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6133679581732459899, guid: a710368f58dc7f44d87b0840549c8ac2,
+    type: 3}
+  m_PrefabInstance: {fileID: 5976059696859826689}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2580539108238295433 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8151744041950104456, guid: a710368f58dc7f44d87b0840549c8ac2,

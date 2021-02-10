@@ -26,19 +26,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbdd6b9d20b9a6640a728a4776e2f7ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthPoints: 20
---- !u!114 &5830745546071357176
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5369179364968814052}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6112906e00faf04da82580ee55a96b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  healthPoints: 30
 --- !u!114 &7793769588704111072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53,6 +41,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chaseDistance: 5
   suspicionTime: 5
+  gizmosOn: 1
+  patrolPath: {fileID: 0}
+  waypointTolerance: 1
+  waypointDwellTime: 3
 --- !u!1001 &2277727653121753247
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -63,6 +55,11 @@ PrefabInstance:
     - target: {fileID: 983356881, guid: a710368f58dc7f44d87b0840549c8ac2, type: 3}
       propertyPath: m_Speed
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1746090694230881808, guid: a710368f58dc7f44d87b0840549c8ac2,
+        type: 3}
+      propertyPath: healthPoints
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 6133679581732459899, guid: a710368f58dc7f44d87b0840549c8ac2,
         type: 3}
@@ -126,6 +123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
+    - {fileID: 1746090694230881808, guid: a710368f58dc7f44d87b0840549c8ac2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a710368f58dc7f44d87b0840549c8ac2, type: 3}
 --- !u!1 &5369179364968814052 stripped
 GameObject:
