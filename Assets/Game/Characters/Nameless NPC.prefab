@@ -14,6 +14,31 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &405210805173161808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571974423828045690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6112906e00faf04da82580ee55a96b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3621880669028086208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 571974423828045690}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbdd6b9d20b9a6640a728a4776e2f7ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthPoints: 100
 --- !u!114 &6986984112762111259
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -32,6 +57,7 @@ MonoBehaviour:
   patrolPath: {fileID: 0}
   waypointTolerance: 1
   waypointDwellTime: 3
+  patrolSpeedFraction: 0.2
 --- !u!1001 &4424753320656695243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -100,40 +126,45 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1485108734906602894, guid: a710368f58dc7f44d87b0840549c8ac2,
+        type: 3}
+      propertyPath: weaponDamage
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 6133679581732459899, guid: a710368f58dc7f44d87b0840549c8ac2,
         type: 3}
       propertyPath: m_Name
-      value: Nameless NPC
+      value: Wise Monk/Bridge Troll
       objectReference: {fileID: 0}
     - target: {fileID: 8151744041950104456, guid: a710368f58dc7f44d87b0840549c8ac2,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -20.53
       objectReference: {fileID: 0}
     - target: {fileID: 8151744041950104456, guid: a710368f58dc7f44d87b0840549c8ac2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -3.3649364
       objectReference: {fileID: 0}
     - target: {fileID: 8151744041950104456, guid: a710368f58dc7f44d87b0840549c8ac2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 30.32
       objectReference: {fileID: 0}
     - target: {fileID: 8151744041950104456, guid: a710368f58dc7f44d87b0840549c8ac2,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8151744041950104456, guid: a710368f58dc7f44d87b0840549c8ac2,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8151744041950104456, guid: a710368f58dc7f44d87b0840549c8ac2,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 8151744041950104456, guid: a710368f58dc7f44d87b0840549c8ac2,
         type: 3}
