@@ -11,10 +11,14 @@ namespace RPG.SceneManagement
 
         [SerializeField] 
 
-        private void Start()
+        private void Awake()
         {
             canvasGroup = GetComponent<CanvasGroup>();
         }
+        public void FadeOutImmediately()
+        {
+            canvasGroup.alpha = 1;
+        }    
         public IEnumerator FadeOut (float time)
         {
             while (canvasGroup.alpha < 1)// alpha is not 1

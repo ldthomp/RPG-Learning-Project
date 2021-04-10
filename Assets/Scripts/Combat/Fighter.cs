@@ -11,15 +11,46 @@ namespace RPG.Combat
     {
         Health target;
         Mover movePlayer;
-        [SerializeField] float weaponRange = 2f;
+
         [SerializeField] float timeBetweenAttacks = 1f;
-        [SerializeField] float weaponDamage = 10f;
+
+        [SerializeField] Weapon defaultWeapon = null;
+
+        [SerializeField] Transform rightHandTransform = null;
+        [SerializeField] Transform leftHandTransform = null;
+
+        Weapon currentWeapon = null;
 
         float timeSinceLastAttack = Mathf.Infinity;
 
         private void Start()
         {
             movePlayer = GetComponent<Mover>();
+            EquipWeapon(defaultWeapon);
+        }
+        void Update()
+        {
+            timeSinceLastAttack += Time.deltaTime;
+            if (target == null) return;
+            if (target.IsDead()) return;
+
+            if (!GetIsInRange())
+            {
+                movePlayer.MoveTo(target.transform.position, 1f);
+            }
+            else
+            {
+                Debug.Log(gameObject.name + " mover is being cancelled");
+                movePlayer.Cancel(); //stops Navmesh
+                AttackBehaviour();
+            }
+        }
+        public void EquipWeapon(Weapon weapon)
+        {
+            if (weapon == null) return;
+            currentWeapon = weapon;
+            Animator animator = GetComponent<Animator>();
+            weapon.Spawn(rightHandTransform, leftHandTransform, animator);
         }
         public void Attack(GameObject combatTarget)
         {
@@ -36,24 +67,6 @@ namespace RPG.Combat
             Health targetToTest = combatTarget.GetComponent<Health>();
             return targetToTest != null && !targetToTest.IsDead();
         }
-        void Update()
-        {
-            timeSinceLastAttack += Time.deltaTime;
-            if (target == null) return;
-            if (target.IsDead()) return;
-
-            if (!GetIsInRange())
-            {
-                movePlayer.MoveTo(target.transform.position, 1f);
-            }
-            else
-            {
-                Debug.Log(gameObject.name + " mover is being cancelled");
-                movePlayer.Cancel(); //stops Navmesh
-                AttackBehaviour(); 
-            }
-        }
-
         private void AttackBehaviour()
         {
             transform.LookAt(target.transform);
@@ -76,13 +89,13 @@ namespace RPG.Combat
         void Hit()
         {
             if (target == null) return;
-            target.TakeDamage(weaponDamage);
+            target.TakeDamage(currentWeapon.GetDamage());
             print("Enemy Taking a Hit");
         }
 
         private bool GetIsInRange()
         {
-            return Vector3.Distance(transform.position, target.transform.position) < weaponRange;
+            return Vector3.Distance(transform.position, target.transform.position) < currentWeapon.GetRange();
         }
 
         public void Cancel()
