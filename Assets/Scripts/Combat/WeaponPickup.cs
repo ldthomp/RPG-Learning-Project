@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,7 @@ namespace RPG.Combat
     {
         Fighter fighter;
         [SerializeField] Weapon weapon = null;
+        [SerializeField] float respawnTime = 5;
 
         private void OnTriggerEnter(Collider other)
         {
@@ -17,7 +19,21 @@ namespace RPG.Combat
 
                 other.GetComponent<Fighter>().EquipWeapon(weapon);
 
-                Destroy(gameObject);
+                StartCoroutine(HideForSeconds(respawnTime));
+            }
+        }
+        private IEnumerator HideForSeconds(float seconds)
+        {
+            ShowPickup(false);
+            yield return new WaitForSeconds(seconds);
+            ShowPickup(true);
+        }
+        private void ShowPickup(bool shouldShow)
+        {
+            GetComponent<SphereCollider>().enabled = shouldShow;
+            foreach (Transform child in transform)
+            {
+                child.gameObject.SetActive(shouldShow);
             }
         }
     }

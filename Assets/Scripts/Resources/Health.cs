@@ -1,18 +1,24 @@
-﻿using RPG.Saving;
+﻿using RPG.Core;
+using RPG.Saving;
+using RPG.Stats;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace RPG.Core
+namespace RPG.Resources
 
 {
     public class Health : MonoBehaviour, ISaveable
     {
-        [SerializeField] float healthPoints = 100f;
+        [SerializeField] float healthPoints;
 
         bool isDead = false;
 
-
+        private void Start()
+        {
+            //know bug that will cause issues with enemies that get killed coming back to life. Start can get called after save file is loaded so the health is reset
+            healthPoints = GetComponent<BaseStats>().GetHealth();
+        }
         public bool IsDead()
         {
             return isDead;
@@ -27,6 +33,11 @@ namespace RPG.Core
             {
                 Death();
             }
+        }
+        public float GetPercentage()
+        {
+            //percentage
+            return 100 * (healthPoints / GetComponent<BaseStats>().GetHealth());
         }
 
         private void Death()

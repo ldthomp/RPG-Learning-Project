@@ -1,13 +1,15 @@
 ﻿using RPG.Core;
 using RPG.Movement;
+using RPG.Saving;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RPG.Resources;
 using UnityEngine.AI;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction
+    public class Fighter : MonoBehaviour, IAction , ISaveable
     {
         Health target;
         Mover movePlayer;
@@ -25,8 +27,11 @@ namespace RPG.Combat
 
         private void Start()
         {
+            if(currentWeapon == null)
+            {
+                EquipWeapon(defaultWeapon);
+            }
             movePlayer = GetComponent<Mover>();
-            EquipWeapon(defaultWeapon);
         }
         void Update()
         {
@@ -51,6 +56,10 @@ namespace RPG.Combat
             currentWeapon = weapon;
             Animator animator = GetComponent<Animator>();
             weapon.Spawn(rightHandTransform, leftHandTransform, animator);
+        }
+        public Health GetTarget()
+        {
+            return target;
         }
         public void Attack(GameObject combatTarget)
         {
@@ -124,6 +133,18 @@ namespace RPG.Combat
             GetComponent<Animator>().ResetTrigger("Attack");
             GetComponent<Animator>().SetTrigger("stopAttacking");
             Debug.Log("setting stop attacking trigger of " + gameObject.name);
+        }
+
+        public object CaptureState()
+        {
+            return currentWeapon.name;
+        }
+
+        public void RestoreState(object state)
+        {
+            string weaponName = (string)state;
+            Weapon weapon = UnityEngine.Resources.Load<Weapon>(weaponName);
+            EquipWeapon(weapon);
         }
     }
 }
