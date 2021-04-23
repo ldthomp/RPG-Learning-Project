@@ -50,6 +50,12 @@ namespace RPG.Saving
                 formatter.Serialize(stream, state);
             }
         }
+
+        public void Delete(string saveFile)
+        {
+            File.Delete(GetPathFromSaveFile(saveFile));
+        }
+
         private Dictionary<string, object> LoadFile(string saveFile)
         {
 
