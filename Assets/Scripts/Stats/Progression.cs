@@ -18,7 +18,8 @@ namespace RPG.Stats
             float[] levels = lookupTable[characterClass][stat];
             if (levels.Length < level)
             {
-                return 0;
+                //return 0;
+                return levels.Length > 0 ? levels[levels.Length - 1] : 0;
             }
 
             return levels[level - 1];

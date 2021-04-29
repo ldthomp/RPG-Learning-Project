@@ -16,7 +16,7 @@ namespace RPG.Stats
         }
         private void Update()
         {
-            GetComponent<Text>().text = string.Format("{0}", level.GetLevel());
+            GetComponent<Text>().text = string.Format("{0}", level.CalculateLevel());
         }
     
     }

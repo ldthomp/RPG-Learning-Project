@@ -4532,6 +4532,12 @@ PrefabInstance:
       propertyPath: handTransform
       value: 
       objectReference: {fileID: 619187450}
+    - target: {fileID: 4077432078183000382, guid: bf83dc2cb2ba12d40b510269b2e7588b,
+        type: 3}
+      propertyPath: levelUpEffect
+      value: 
+      objectReference: {fileID: 8799753066291535444, guid: 6e369b03e15bfbc4faba5b4e3b87e780,
+        type: 3}
     - target: {fileID: 4667585729917973167, guid: bf83dc2cb2ba12d40b510269b2e7588b,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -4706,6 +4712,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7088790201998177064, guid: bf83dc2cb2ba12d40b510269b2e7588b,
+        type: 3}
+      propertyPath: healthPoints
+      value: -1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bf83dc2cb2ba12d40b510269b2e7588b, type: 3}

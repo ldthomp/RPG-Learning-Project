@@ -14,32 +14,6 @@ CapsuleCollider:
   m_Height: 1.95
   m_Direction: 1
   m_Center: {x: 0, y: 0.95, z: 0}
---- !u!114 &201219883
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 895885730377789648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbdd6b9d20b9a6640a728a4776e2f7ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthPoints: 200
---- !u!114 &201219889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 895885730377789648}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 947f5ee831b1c8445b074bc8bf7e5b74, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerSpeedFraction: 1
 --- !u!114 &-7063735114203995113
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53,6 +27,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   experiencePoints: 0
+--- !u!114 &201219889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895885730377789648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 947f5ee831b1c8445b074bc8bf7e5b74, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSpeedFraction: 1
+--- !u!114 &7366588182990589235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895885730377789648}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbdd6b9d20b9a6640a728a4776e2f7ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthPoints: -1
 --- !u!1001 &6445185737678169515
 PrefabInstance:
   m_ObjectHideFlags: 0

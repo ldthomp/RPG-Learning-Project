@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using RPG.Resources;
 using UnityEngine.AI;
+using RPG.Stats;
 
 namespace RPG.Combat
 {
-    public class Fighter : MonoBehaviour, IAction , ISaveable
+    public class Fighter : MonoBehaviour, IAction , ISaveable, IModifierProvider
     {
         Health target;
         Mover movePlayer;
@@ -98,14 +99,14 @@ namespace RPG.Combat
         void Hit()
         {
             if (target == null) return;
-
+            float damage = GetComponent<BaseStats>().GetStat(Stat.Damage);
             if (currentWeapon.HasProjectile())
             {
-                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject);
+                currentWeapon.LaunchProjectile(rightHandTransform, leftHandTransform, target, gameObject, damage);
             }
             else
             {
-                target.TakeDamage(gameObject, currentWeapon.GetDamage());
+                target.TakeDamage(gameObject, damage);
             }
 
             print("Enemy Taking a Hit");
@@ -127,7 +128,13 @@ namespace RPG.Combat
             target = null;
             movePlayer.Cancel();
         }
-
+        public IEnumerable<float> GetAdditiveModifier(Stat stat)
+        {
+            if(stat == Stat.Damage)
+            {
+                yield return currentWeapon.GetDamage();
+            }
+        }
         private void StopAttack()
         {
             GetComponent<Animator>().ResetTrigger("Attack");
@@ -146,5 +153,7 @@ namespace RPG.Combat
             Weapon weapon = UnityEngine.Resources.Load<Weapon>(weaponName);
             EquipWeapon(weapon);
         }
+
+
     }
 }
