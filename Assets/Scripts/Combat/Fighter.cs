@@ -128,11 +128,18 @@ namespace RPG.Combat
             target = null;
             movePlayer.Cancel();
         }
-        public IEnumerable<float> GetAdditiveModifier(Stat stat)
+        public IEnumerable<float> GetAdditiveModifiers(Stat stat)
         {
             if(stat == Stat.Damage)
             {
                 yield return currentWeapon.GetDamage();
+            }
+        }
+        public IEnumerable<float> GetPercentageModifiers(Stat stat)
+        {
+            if (stat == Stat.Damage)
+            {
+                yield return currentWeapon.GetPercentageBonus();
             }
         }
         private void StopAttack()
@@ -153,7 +160,5 @@ namespace RPG.Combat
             Weapon weapon = UnityEngine.Resources.Load<Weapon>(weaponName);
             EquipWeapon(weapon);
         }
-
-
     }
 }
