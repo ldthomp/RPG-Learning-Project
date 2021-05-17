@@ -10,7 +10,7 @@ namespace RPG.Control
         Health health;
         [SerializeField] float playerSpeedFraction = 1f;
 
-        private void Start()
+        private void Awake()
         {
             health = GetComponent<Health>();
         }
