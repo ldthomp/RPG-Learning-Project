@@ -5,13 +5,23 @@ using System.Collections;
 using System.Collections.Generic;
 using GameDevTV.Utils;
 using UnityEngine;
+using UnityEngine.Events;
 
-namespace RPG.Resources
+namespace RPG.Attributes
 
 {
     public class Health : MonoBehaviour, ISaveable
     {
         [SerializeField] float regenerationPercentage= 70f;
+
+        [SerializeField] TakeDamageEvent takeDamage;
+
+        [System.Serializable]
+        public class TakeDamageEvent : UnityEvent<float>
+        {
+
+        }
+
         LazyValue<float> healthPoints;
 
         bool isDead = false;
@@ -47,12 +57,16 @@ namespace RPG.Resources
         public float GetPercentage()
         {
             //percentage
-            return 100 * (healthPoints.value / GetComponent<BaseStats>().GetStat(Stat.Health));
+            return 100 * GetFraction();
+        }        
+        public float GetFraction()
+        {
+            return healthPoints.value / GetComponent<BaseStats>().GetStat(Stat.Health);
         }
 
         public object CaptureState()
         {
-            return healthPoints;
+            return healthPoints.value;
         }
 
         public void RestoreState(object state)
@@ -72,11 +86,14 @@ namespace RPG.Resources
             healthPoints.value = Mathf.Max(healthPoints.value - damage, 0);
             print(gameObject.name + " took damage " + damage);
 
-
             if (healthPoints.value == 0)
             {
                 AwardExperience(instigator);
                 Death();
+            }
+            else
+            {
+                takeDamage.Invoke(damage);
             }
         }
         public float GetHealthPoints()

@@ -4,7 +4,7 @@ using RPG.Saving;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using RPG.Resources;
+using RPG.Attributes;
 using UnityEngine.AI;
 using GameDevTV.Utils;
 using RPG.Stats;
